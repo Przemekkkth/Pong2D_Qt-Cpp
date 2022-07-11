@@ -106,31 +106,37 @@ void GameScene::drawScores()
 void GameScene::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
-        case Qt::Key_Up:
+    case Qt::Key_Up:
+    {
+        if(m_rightPaddle.type() == Paddle::PaddleType::PLAYER1)
         {
             m_rightPaddle.setMoveUp(true);
         }
+    }
         break;
     case Qt::Key_Down:
+    {
+        if(m_rightPaddle.type() == Paddle::PaddleType::PLAYER1)
         {
             m_rightPaddle.setMoveDown(true);
         }
+    }
         break;
-        case Qt::Key_W:
+    case Qt::Key_W:
+    {
+        if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
         {
-            if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
-            {
-                m_leftPaddle.setMoveUp(true);
-            }
+            m_leftPaddle.setMoveUp(true);
         }
+    }
         break;
-        case Qt::Key_S:
-        {
+    case Qt::Key_S:
+    {
         if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
         {
             m_leftPaddle.setMoveDown(true);
         }
-        }
+    }
         break;
     }
     QGraphicsScene::keyPressEvent(event);
@@ -139,31 +145,31 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 void GameScene::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key()) {
-        case Qt::Key_Up:
-        {
-            m_rightPaddle.setMoveUp(false);
-        }
+    case Qt::Key_Up:
+    {
+        m_rightPaddle.setMoveUp(false);
+    }
         break;
     case Qt::Key_Down:
-        {
-            m_rightPaddle.setMoveDown(false);
-        }
+    {
+        m_rightPaddle.setMoveDown(false);
+    }
         break;
-        case Qt::Key_W:
+    case Qt::Key_W:
+    {
+        if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
         {
-            if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
-            {
-                m_leftPaddle.setMoveUp(false);
-            }
+            m_leftPaddle.setMoveUp(false);
         }
+    }
         break;
-        case Qt::Key_S:
-        {
+    case Qt::Key_S:
+    {
         if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
         {
             m_leftPaddle.setMoveDown(false);
         }
-        }
+    }
         break;
     }
     QGraphicsScene::keyReleaseEvent(event);
