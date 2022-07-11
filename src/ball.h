@@ -29,6 +29,7 @@ public:
     void increaseSpeed();
 
     void update();
+    void reset(X_DIRECTION dir = X_DIRECTION::RIGHT);
 private:
     int m_diameter;
     float m_speed;

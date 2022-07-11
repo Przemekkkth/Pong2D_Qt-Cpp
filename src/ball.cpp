@@ -85,13 +85,13 @@ void Ball::update()
     //left wall
     if (0.f > m_position.x())
     {
-        //        Pong::GiveRightPlayerAPoint();
-        //        Pong::Reset(true);
+        Game::SCORE_2++;
+        reset(X_DIRECTION::RIGHT);
     }
     else if ( Game::RESOLUTION.width() < m_position.x()+m_diameter)
     {
-        //        Pong::GiveLeftPlayerAPoint();
-        //        Pong::Reset(true);
+        Game::SCORE_1++;
+        reset(X_DIRECTION::LEFT);
     }
 
     m_speed = m_speed > m_maxSpeed ? m_maxSpeed : m_speed;
@@ -130,5 +130,12 @@ void Ball::update()
     {}
         break;
     }
+}
+
+void Ball::reset(X_DIRECTION dir)
+{
+    setPos(QPointF(Game::RESOLUTION.width()/2-m_diameter, Game::RESOLUTION.height()/2-m_diameter));
+    setXDir(dir);
+    setYDir(Y_DIRECTION::NONE);
 }
 
