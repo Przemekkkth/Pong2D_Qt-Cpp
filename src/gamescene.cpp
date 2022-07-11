@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QGraphicsPixmapItem>
 #include <QKeyEvent>
+#include <QFontDatabase>
+#include <QGraphicsSimpleTextItem>
 
 GameScene::GameScene(QObject *parent)
     : QGraphicsScene{parent}, m_deltaTime(0.0f), m_loopTime(0.0f), m_loopSpeed(15.0f),
@@ -18,6 +20,9 @@ GameScene::GameScene(QObject *parent)
     connect(&m_timer, &QTimer::timeout, this, &GameScene::loop);
     m_timer.start(Game::ITERATION_VALUE);
     m_elapsedTimer.start();
+
+    int id = QFontDatabase::addApplicationFont(":/res/college.ttf");
+    m_familyName = QFontDatabase::applicationFontFamilies(id).at(0);
 }
 
 void GameScene::loop()
@@ -71,7 +76,7 @@ void GameScene::render()
     ball->setPos(m_ball.position());
     addItem(ball);
 
-
+    drawScores();
 }
 
 void GameScene::updateLoop()
@@ -79,6 +84,23 @@ void GameScene::updateLoop()
     m_ball.update();
     m_leftPaddle.update(m_ball);
     m_rightPaddle.update(m_ball);
+}
+
+void GameScene::drawScores()
+{
+    QGraphicsSimpleTextItem* text1 = new QGraphicsSimpleTextItem(QString::number(Game::SCORE_1));
+    text1->setFont(QFont(m_familyName, 24, 50, false));
+    text1->setBrush(QBrush(Qt::white));
+    text1->setPen(QPen(Qt::NoPen));
+    text1->setPos(0.40f*Game::RESOLUTION.width(), 0.05f*Game::RESOLUTION.height());
+    addItem(text1);
+
+    QGraphicsSimpleTextItem* text2 = new QGraphicsSimpleTextItem(QString::number(Game::SCORE_2));
+    text2->setFont(QFont(m_familyName, 24, 50, false));
+    text2->setBrush(QBrush(Qt::white));
+    text2->setPen(QPen(Qt::NoPen));
+    text2->setPos(0.60f*Game::RESOLUTION.width(), 0.05f*Game::RESOLUTION.height());
+    addItem(text2);
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)

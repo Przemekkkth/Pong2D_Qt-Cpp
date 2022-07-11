@@ -22,6 +22,7 @@ private:
     void loadPixmap();
     void render();
     void updateLoop();
+    void drawScores();
     float m_deltaTime, m_loopTime;
     const float m_loopSpeed;
     Game m_game;
@@ -34,6 +35,7 @@ private:
     Paddle	m_leftPaddle;
     Ball	m_ball;
 
+    QString m_familyName;
     // QGraphicsScene interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
