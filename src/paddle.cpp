@@ -33,10 +33,13 @@ void Paddle::setSize(QSize newSize)
 
 void Paddle::update(Ball &ball)
 {
-    if ( m_position.x() + m_size.width() > ball.position().x() &&
-         m_position.x() < ball.position().x() &&
-         m_position.y() + m_size.height() > ball.position().y() &&
-         m_position.y() < ball.position().y())
+    //Axis-Aligned Bounding Box
+    if (
+         m_position.x()                   < ball.position().x() + ball.diameter() &&
+         m_position.x() + m_size.width()  > ball.position().x()                   &&
+         m_position.y()                   < ball.position().y() + ball.diameter() &&
+         m_position.y() + m_size.height() > ball.position().y()
+       )
     {
         if ( m_position.y() + (m_size.height() * 0.33f) > ball.position().y())
         {
@@ -46,6 +49,19 @@ void Paddle::update(Ball &ball)
         {
             ball.setYDir(Ball::Y_DIRECTION::DOWN);
         }
+
+        switch (m_type)
+        {
+        case PaddleType::PLAYER1:
+            ball.setXDir(Ball::X_DIRECTION::LEFT);
+            break;
+        case PaddleType::AI:
+        case PaddleType::PLAYER2:
+            ball.setXDir(Ball::X_DIRECTION::RIGHT);
+            break;
+        }
+
+        ball.increaseSpeed();
     }
 }
 
