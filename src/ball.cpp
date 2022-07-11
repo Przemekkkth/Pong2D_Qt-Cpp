@@ -54,6 +54,15 @@ int Ball::diameter() const
     return m_diameter;
 }
 
+void Ball::setDiameter(int newVal)
+{
+    if(newVal == m_diameter)
+    {
+        return;
+    }
+    m_diameter = newVal;
+}
+
 void Ball::increaseSpeed()
 {
     m_speed += m_speed * 0.1f;

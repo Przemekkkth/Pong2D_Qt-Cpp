@@ -4,6 +4,7 @@ HEADERS += \
     src/ball.h \
     src/game.h \
     src/gamescene.h \
+    src/paddle.h \
     src/view.h
 
 SOURCES += \
@@ -11,7 +12,11 @@ SOURCES += \
     src/game.cpp \
     src/gamescene.cpp \
     src/main.cpp \
+    src/paddle.cpp \
     src/view.cpp \
 
 
 QT += widgets
+
+RESOURCES += \
+    resource.qrc

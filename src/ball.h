@@ -5,7 +5,7 @@
 class Ball
 {
 public:
-    Ball(int diameter);
+    Ball(int diameter = 1);
     enum class Y_DIRECTION
     {
         NONE, UP, DOWN
@@ -24,6 +24,7 @@ public:
     void setPos(QPointF newPos);
 
     int diameter() const;
+    void setDiameter(int newVal);
 
     void increaseSpeed();
 
