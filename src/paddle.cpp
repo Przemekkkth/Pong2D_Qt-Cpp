@@ -34,7 +34,7 @@ void Paddle::setSize(QSize newSize)
 
 void Paddle::update(Ball &ball)
 {
-    //Axis-Aligned Bounding Box
+    //Axis-Aligned Bounding-Box
     if (
          m_position.x()                   < ball.position().x() + ball.diameter() &&
          m_position.x() + m_size.width()  > ball.position().x()                   &&
