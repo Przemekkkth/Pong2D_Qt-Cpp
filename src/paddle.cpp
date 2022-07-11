@@ -82,7 +82,28 @@ void Paddle::update(Ball &ball)
         break;
     case PaddleType::AI:
         {
-
+            if(ball.position().y() < m_position.y())
+            {
+                if(m_position.y() - ball.position().y() < 0.5f)
+                {
+                    setPosition(position() + QPointF(0, -m_minSpeed));
+                }
+                else
+                {
+                    setPosition(position() + QPointF(0, -m_baseSpeed));
+                }
+            }
+            else if(ball.position().y() + ball.diameter() > m_position.y() + m_size.height())
+            {
+                if(ball.position().y() + ball.diameter() - m_position.y() + m_size.height() < 0.5f)
+                {
+                    setPosition(position() + QPointF(0,  m_minSpeed));
+                }
+                else
+                {
+                    setPosition(position() + QPointF(0,  m_baseSpeed));
+                }
+            }
         }
         break;
     }
