@@ -26,6 +26,7 @@ public:
 
     PaddleType type() const;
 private:
+    void clampPaddle();
     PaddleType  m_type;
     float   m_baseSpeed;
     float   m_minSpeed;

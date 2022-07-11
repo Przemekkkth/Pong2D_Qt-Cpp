@@ -107,6 +107,7 @@ void Paddle::update(Ball &ball)
         }
         break;
     }
+    clampPaddle();
 }
 
 QPointF Paddle::position() const
@@ -144,4 +145,16 @@ void Paddle::setMoveDown(bool val)
 Paddle::PaddleType Paddle::type() const
 {
     return m_type;
+}
+
+void Paddle::clampPaddle()
+{
+    if(m_position.y() < 0.0f)
+    {
+        setPosition(QPointF(m_position.x(), 0.0f));
+    }
+    if(m_position.y() + m_size.height() > Game::RESOLUTION.height())
+    {
+        setPosition(QPointF(m_position.x(), Game::RESOLUTION.height() - m_size.height()));
+    }
 }
