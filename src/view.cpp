@@ -18,4 +18,5 @@ void View::keyPressEvent(QKeyEvent *event)
             QApplication::instance()->quit();
         break;
     }
+    QGraphicsView::keyPressEvent(event);
 }

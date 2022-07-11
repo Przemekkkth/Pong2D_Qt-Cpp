@@ -2,6 +2,7 @@
 #include <QPixmap>
 #include <QDebug>
 #include <QGraphicsPixmapItem>
+#include <QKeyEvent>
 
 GameScene::GameScene(QObject *parent)
     : QGraphicsScene{parent}, m_deltaTime(0.0f), m_loopTime(0.0f), m_loopSpeed(15.0f),
@@ -78,4 +79,70 @@ void GameScene::updateLoop()
     m_ball.update();
     m_leftPaddle.update(m_ball);
     m_rightPaddle.update(m_ball);
+}
+
+void GameScene::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+        case Qt::Key_Up:
+        {
+            m_rightPaddle.setMoveUp(true);
+        }
+        break;
+    case Qt::Key_Down:
+        {
+            m_rightPaddle.setMoveDown(true);
+        }
+        break;
+        case Qt::Key_W:
+        {
+            if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
+            {
+                m_leftPaddle.setMoveUp(true);
+            }
+        }
+        break;
+        case Qt::Key_S:
+        {
+        if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
+        {
+            m_leftPaddle.setMoveDown(true);
+        }
+        }
+        break;
+    }
+    QGraphicsScene::keyPressEvent(event);
+}
+
+void GameScene::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+        case Qt::Key_Up:
+        {
+            m_rightPaddle.setMoveUp(false);
+        }
+        break;
+    case Qt::Key_Down:
+        {
+            m_rightPaddle.setMoveDown(false);
+        }
+        break;
+        case Qt::Key_W:
+        {
+            if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
+            {
+                m_leftPaddle.setMoveUp(false);
+            }
+        }
+        break;
+        case Qt::Key_S:
+        {
+        if(m_leftPaddle.type() == Paddle::PaddleType::PLAYER2)
+        {
+            m_leftPaddle.setMoveDown(false);
+        }
+        }
+        break;
+    }
+    QGraphicsScene::keyReleaseEvent(event);
 }

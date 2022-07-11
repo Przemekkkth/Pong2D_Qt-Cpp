@@ -20,12 +20,19 @@ public:
 
     QPointF position() const;
     void setPosition(QPointF newPoint);
+
+    void setMoveUp(bool val);
+    void setMoveDown(bool val);
+
+    PaddleType type() const;
 private:
     PaddleType  m_type;
     float   m_baseSpeed;
     float   m_minSpeed;
     QSize m_size;
     QPointF m_position;
+
+    bool m_moveUp, m_moveDown;
 };
 
 #endif // PADDLE_H

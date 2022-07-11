@@ -2,7 +2,8 @@
 #include "ball.h"
 #include "game.h"
 Paddle::Paddle(PaddleType type, QSize size)
-    : m_type(type), m_size(size)
+    : m_type(type), m_baseSpeed(6.0f), m_minSpeed(1.0f), m_size(size),
+      m_moveUp(false), m_moveDown(false)
 {
     switch (m_type)
     {
@@ -63,6 +64,28 @@ void Paddle::update(Ball &ball)
 
         ball.increaseSpeed();
     }
+
+
+    switch (m_type) {
+        case PaddleType::PLAYER1:
+        case PaddleType::PLAYER2:
+        {
+            if(m_moveUp)
+            {
+                setPosition(position() + QPointF(0, -m_baseSpeed));
+            }
+            else if(m_moveDown)
+            {
+                setPosition(position() + QPointF(0, +m_baseSpeed));
+            }
+        }
+        break;
+    case PaddleType::AI:
+        {
+
+        }
+        break;
+    }
 }
 
 QPointF Paddle::position() const
@@ -77,4 +100,27 @@ void Paddle::setPosition(QPointF newPoint)
         return;
     }
     m_position = newPoint;
+}
+
+void Paddle::setMoveUp(bool val)
+{
+    if(m_moveUp == val)
+    {
+        return;
+    }
+    m_moveUp = val;
+}
+
+void Paddle::setMoveDown(bool val)
+{
+    if(m_moveDown == val)
+    {
+        return;
+    }
+    m_moveDown = val;
+}
+
+Paddle::PaddleType Paddle::type() const
+{
+    return m_type;
 }

@@ -33,6 +33,11 @@ private:
     Paddle	m_rightPaddle;
     Paddle	m_leftPaddle;
     Ball	m_ball;
+
+    // QGraphicsScene interface
+protected:
+    virtual void keyPressEvent(QKeyEvent *event) override;
+    virtual void keyReleaseEvent(QKeyEvent *event) override;
 };
 
 #endif // GAMESCENE_H
