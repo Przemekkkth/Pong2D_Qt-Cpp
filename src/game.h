@@ -11,7 +11,6 @@ public:
     static const QString PATH_TO_PADDLE_PIXMAP;
     static const QString PATH_TO_BALL_PIXMAP;
     static int SCORE_1, SCORE_2;
-
 };
 
 #endif // GAME_H

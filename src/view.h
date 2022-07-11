@@ -3,6 +3,8 @@
 
 #include <QGraphicsView>
 #include "gamescene.h"
+#include "menuscene.h"
+
 class View : public QGraphicsView
 {
     Q_OBJECT
@@ -13,7 +15,7 @@ signals:
 
 private:
     GameScene* m_gameScene;
-
+    MenuScene* m_menuScene;
     // QWidget interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;

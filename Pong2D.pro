@@ -4,6 +4,7 @@ HEADERS += \
     src/ball.h \
     src/game.h \
     src/gamescene.h \
+    src/menuscene.h \
     src/paddle.h \
     src/view.h
 
@@ -12,6 +13,7 @@ SOURCES += \
     src/game.cpp \
     src/gamescene.cpp \
     src/main.cpp \
+    src/menuscene.cpp \
     src/paddle.cpp \
     src/view.cpp \
 
