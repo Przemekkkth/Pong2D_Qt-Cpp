@@ -9,7 +9,7 @@ View::View()
     resize(sceneRect().width() + 2, sceneRect().height() + 2);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setScene(m_menuScene);
+    setScene(m_menuScene);
 }
 
 void View::keyPressEvent(QKeyEvent *event)
