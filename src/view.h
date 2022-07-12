@@ -13,6 +13,8 @@ public:
 
 signals:
 
+private slots:
+
 private:
     GameScene* m_gameScene;
     MenuScene* m_menuScene;

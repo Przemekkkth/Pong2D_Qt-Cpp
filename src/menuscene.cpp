@@ -39,6 +39,8 @@ MenuScene::MenuScene(QObject *parent)
     m_pcVsPCText->setPen(QPen(Qt::NoPen));
     m_pcVsPCText->setPos(0.42f*Game::RESOLUTION.width(), 0.65f*Game::RESOLUTION.height());
     addItem(m_pcVsPCText);
+
+
 }
 
 void MenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)

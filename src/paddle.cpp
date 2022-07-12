@@ -5,17 +5,7 @@ Paddle::Paddle(PaddleType type, QSize size)
     : m_type(type), m_baseSpeed(6.0f), m_minSpeed(1.0f), m_size(size),
       m_moveUp(false), m_moveDown(false)
 {
-    switch (m_type)
-    {
-    case Paddle::PaddleType::PLAYER1:
-        setPosition(QPointF(0.95f*Game::RESOLUTION.width(), 0.5f*Game::RESOLUTION.height()));
-        break;
-    case Paddle::PaddleType::AI:
-    case Paddle::PaddleType::PLAYER2:
-        setPosition(QPointF(0.05f*Game::RESOLUTION.width(), 0.5f*Game::RESOLUTION.height()));
-        break;
-    }
-
+    init();
 }
 
 QSize Paddle::size() const
@@ -145,6 +135,29 @@ void Paddle::setMoveDown(bool val)
 Paddle::PaddleType Paddle::type() const
 {
     return m_type;
+}
+
+void Paddle::setPaddleType(PaddleType type)
+{
+    if( m_type == type)
+    {
+        return;
+    }
+    m_type = type;
+}
+
+void Paddle::init()
+{
+    switch (m_type)
+    {
+    case Paddle::PaddleType::PLAYER1:
+        setPosition(QPointF(0.95f*Game::RESOLUTION.width(), 0.5f*Game::RESOLUTION.height()));
+        break;
+    case Paddle::PaddleType::AI:
+    case Paddle::PaddleType::PLAYER2:
+        setPosition(QPointF(0.05f*Game::RESOLUTION.width(), 0.5f*Game::RESOLUTION.height()));
+        break;
+    }
 }
 
 void Paddle::clampPaddle()

@@ -10,6 +10,22 @@ View::View()
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setScene(m_menuScene);
+
+    connect(m_menuScene, &MenuScene::pVSpcActivated, [this](){
+       m_gameScene->reset(Paddle::PaddleType::AI, Paddle::PaddleType::PLAYER1);
+       setScene(m_gameScene);
+    });
+
+    connect(m_menuScene, &MenuScene::pVSpActivated, [this](){
+       m_gameScene->reset(Paddle::PaddleType::PLAYER2, Paddle::PaddleType::PLAYER1);
+       setScene(m_gameScene);
+    });
+
+    connect(m_menuScene, &MenuScene::pcVSpcActivated, [this](){
+       m_gameScene->reset(Paddle::PaddleType::AI, Paddle::PaddleType::AI);
+       setScene(m_gameScene);
+    });
+
 }
 
 void View::keyPressEvent(QKeyEvent *event)

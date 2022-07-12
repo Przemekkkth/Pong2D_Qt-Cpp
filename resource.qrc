@@ -3,5 +3,6 @@
         <file>res/paddle.png</file>
         <file>res/ball.png</file>
         <file>res/college.ttf</file>
+        <file>res/cursor.png</file>
     </qresource>
 </RCC>

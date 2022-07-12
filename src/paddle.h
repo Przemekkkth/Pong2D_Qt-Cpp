@@ -25,6 +25,9 @@ public:
     void setMoveDown(bool val);
 
     PaddleType type() const;
+    void setPaddleType(PaddleType type);
+
+    void init();
 private:
     void clampPaddle();
     PaddleType  m_type;

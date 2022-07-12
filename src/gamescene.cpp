@@ -25,6 +25,21 @@ GameScene::GameScene(QObject *parent)
     m_familyName = QFontDatabase::applicationFontFamilies(id).at(0);
 }
 
+void GameScene::reset(Paddle::PaddleType leftPaddleMode, Paddle::PaddleType rightPaddleMode)
+{
+    m_leftPaddle.setPaddleType(leftPaddleMode);
+    m_rightPaddle.setPaddleType(rightPaddleMode);
+
+    m_ball.setPos(QPointF(Game::RESOLUTION.width()/2-m_ball.diameter(), Game::RESOLUTION.height()/2-m_ball.diameter()));
+    m_ball.setXDir(Ball::X_DIRECTION::LEFT);
+    m_ball.setYDir(Ball::Y_DIRECTION::NONE);
+
+    m_leftPaddle.init();
+    m_rightPaddle.init();
+
+    Game::SCORE_1 = Game::SCORE_2 = 0;
+}
+
 void GameScene::loop()
 {
     m_deltaTime = m_elapsedTimer.elapsed();

@@ -13,7 +13,7 @@ class GameScene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit GameScene(QObject *parent = nullptr);
-
+    void reset(Paddle::PaddleType leftPaddleMode, Paddle::PaddleType rightPaddleMode);
 signals:
 
 private slots:
