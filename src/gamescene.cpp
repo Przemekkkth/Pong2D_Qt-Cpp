@@ -23,6 +23,7 @@ GameScene::GameScene(QObject *parent)
 
     int id = QFontDatabase::addApplicationFont(":/res/college.ttf");
     m_familyName = QFontDatabase::applicationFontFamilies(id).at(0);
+
 }
 
 void GameScene::reset(Paddle::PaddleType leftPaddleMode, Paddle::PaddleType rightPaddleMode)
@@ -38,6 +39,8 @@ void GameScene::reset(Paddle::PaddleType leftPaddleMode, Paddle::PaddleType righ
     m_rightPaddle.init();
 
     Game::SCORE_1 = Game::SCORE_2 = 0;
+
+    m_game.m_isPause = false;
 }
 
 void GameScene::loop()
@@ -183,6 +186,10 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             {
                 m_game.m_isPause = false;
             }
+        }
+        else if(event->key() == Qt::Key_Backspace)
+        {
+            emit menuActivated();
         }
     }
     QGraphicsScene::keyPressEvent(event);

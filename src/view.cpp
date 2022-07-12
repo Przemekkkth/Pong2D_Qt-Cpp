@@ -26,6 +26,9 @@ View::View()
        setScene(m_gameScene);
     });
 
+    connect(m_gameScene, &GameScene::menuActivated, [this](){
+        setScene(m_menuScene);
+    });
 }
 
 void View::keyPressEvent(QKeyEvent *event)

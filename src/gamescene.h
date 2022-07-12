@@ -15,7 +15,7 @@ public:
     explicit GameScene(QObject *parent = nullptr);
     void reset(Paddle::PaddleType leftPaddleMode, Paddle::PaddleType rightPaddleMode);
 signals:
-
+    void menuActivated();
 private slots:
     void loop();
 private:
