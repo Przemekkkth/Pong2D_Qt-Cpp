@@ -22,7 +22,7 @@ View::View()
     });
 
     connect(m_menuScene, &MenuScene::pcVSpcActivated, [this](){
-       m_gameScene->reset(Paddle::PaddleType::AI, Paddle::PaddleType::AI);
+       m_gameScene->reset(Paddle::PaddleType::AI, Paddle::PaddleType::AI1);
        setScene(m_gameScene);
     });
 

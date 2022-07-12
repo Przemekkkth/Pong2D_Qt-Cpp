@@ -26,11 +26,11 @@ void Paddle::update(Ball &ball)
 {
     //Axis-Aligned Bounding-Box
     if (
-         m_position.x()                   < ball.position().x() + ball.diameter() &&
-         m_position.x() + m_size.width()  > ball.position().x()                   &&
-         m_position.y()                   < ball.position().y() + ball.diameter() &&
-         m_position.y() + m_size.height() > ball.position().y()
-       )
+            m_position.x()                   < ball.position().x() + ball.diameter() &&
+            m_position.x() + m_size.width()  > ball.position().x()                   &&
+            m_position.y()                   < ball.position().y() + ball.diameter() &&
+            m_position.y() + m_size.height() > ball.position().y()
+            )
     {
         if ( m_position.y() + (m_size.height() * 0.33f) > ball.position().y())
         {
@@ -57,44 +57,45 @@ void Paddle::update(Ball &ball)
 
 
     switch (m_type) {
-        case PaddleType::PLAYER1:
-        case PaddleType::PLAYER2:
+    case PaddleType::PLAYER1:
+    case PaddleType::PLAYER2:
+    {
+        if(m_moveUp)
         {
-            if(m_moveUp)
+            setPosition(position() + QPointF(0, -m_baseSpeed));
+        }
+        else if(m_moveDown)
+        {
+            setPosition(position() + QPointF(0, +m_baseSpeed));
+        }
+    }
+        break;
+    case PaddleType::AI:
+    case PaddleType::AI1:
+    {
+        if(ball.position().y() < m_position.y())
+        {
+            if(m_position.y() - ball.position().y() < 0.5f)
+            {
+                setPosition(position() + QPointF(0, -m_minSpeed));
+            }
+            else
             {
                 setPosition(position() + QPointF(0, -m_baseSpeed));
             }
-            else if(m_moveDown)
-            {
-                setPosition(position() + QPointF(0, +m_baseSpeed));
-            }
         }
-        break;
-    case PaddleType::AI:
+        else if(ball.position().y() + ball.diameter() > m_position.y() + m_size.height())
         {
-            if(ball.position().y() < m_position.y())
+            if(ball.position().y() + ball.diameter() - m_position.y() + m_size.height() < 0.5f)
             {
-                if(m_position.y() - ball.position().y() < 0.5f)
-                {
-                    setPosition(position() + QPointF(0, -m_minSpeed));
-                }
-                else
-                {
-                    setPosition(position() + QPointF(0, -m_baseSpeed));
-                }
+                setPosition(position() + QPointF(0,  m_minSpeed));
             }
-            else if(ball.position().y() + ball.diameter() > m_position.y() + m_size.height())
+            else
             {
-                if(ball.position().y() + ball.diameter() - m_position.y() + m_size.height() < 0.5f)
-                {
-                    setPosition(position() + QPointF(0,  m_minSpeed));
-                }
-                else
-                {
-                    setPosition(position() + QPointF(0,  m_baseSpeed));
-                }
+                setPosition(position() + QPointF(0,  m_baseSpeed));
             }
         }
+    }
         break;
     }
     clampPaddle();
@@ -151,6 +152,7 @@ void Paddle::init()
     switch (m_type)
     {
     case Paddle::PaddleType::PLAYER1:
+    case Paddle::PaddleType::AI1:
         setPosition(QPointF(0.95f*Game::RESOLUTION.width(), 0.5f*Game::RESOLUTION.height()));
         break;
     case Paddle::PaddleType::AI:

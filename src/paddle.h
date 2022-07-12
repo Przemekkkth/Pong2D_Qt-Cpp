@@ -10,7 +10,7 @@ class Paddle
 public:
     enum class PaddleType
     {
-        PLAYER1, AI, PLAYER2
+        PLAYER1, AI, PLAYER2, AI1
     };
     Paddle(PaddleType type, QSize size = QSize(1,1));
 
