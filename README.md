@@ -19,3 +19,4 @@ qmake && make
 
 ## Adons
 * [Qt] (https://www.qt.io/) - Cross-Platform software for embedded & desktop
+* [Yt] (https://youtu.be/0Pt-XsYm9qI) - gameplay
