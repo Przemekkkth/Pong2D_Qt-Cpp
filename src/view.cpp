@@ -29,6 +29,8 @@ View::View()
     connect(m_gameScene, &GameScene::menuActivated, [this](){
         setScene(m_menuScene);
     });
+
+    setCursor(QCursor(QPixmap(Game::PATH_TO_CURSOR_PIXMAP)));
 }
 
 void View::keyPressEvent(QKeyEvent *event)
