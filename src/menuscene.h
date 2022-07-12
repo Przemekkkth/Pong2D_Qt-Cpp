@@ -15,6 +15,7 @@ signals:
     void pVSpActivated();
     void pcVSpcActivated();
 private:
+    void renderScene();
     QGraphicsSimpleTextItem *m_titleText;
     QGraphicsSimpleTextItem *m_playerVsPCText;
     QGraphicsSimpleTextItem *m_playerVSPlayerText;
@@ -24,6 +25,7 @@ private:
     // QGraphicsScene interface
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // MENUSCENE_H

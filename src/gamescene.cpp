@@ -5,6 +5,8 @@
 #include <QKeyEvent>
 #include <QFontDatabase>
 #include <QGraphicsSimpleTextItem>
+#include <QDir>
+#include <QPainter>
 
 GameScene::GameScene(QObject *parent)
     : QGraphicsScene{parent}, m_deltaTime(0.0f), m_loopTime(0.0f), m_loopSpeed(15.0f),
@@ -52,7 +54,7 @@ void GameScene::loop()
     if( m_loopTime > m_loopSpeed && !m_game.m_isPause)
     {
         m_loopTime -= m_loopSpeed;
-        render();
+        renderGame();
         updateLoop();
     }
     drawPauseText();
@@ -79,7 +81,7 @@ void GameScene::loadPixmap()
     }
 }
 
-void GameScene::render()
+void GameScene::renderGame()
 {
     clear();
     setBackgroundBrush(QBrush(Qt::black));
@@ -136,6 +138,19 @@ void GameScene::drawPauseText()
     }
 }
 
+void GameScene::renderScene()
+{
+    static int index = 0;
+    QString fileName = QDir::currentPath() + QDir::separator() + "screen" + QString::number(index++) + ".png";
+    QRect rect = sceneRect().toAlignedRect();
+    QImage image(rect.size(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter(&image);
+    render(&painter);
+    image.save(fileName);
+    qDebug() << "saved " << fileName;
+}
+
 void GameScene::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
@@ -190,6 +205,10 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         else if(event->key() == Qt::Key_Backspace)
         {
             emit menuActivated();
+        }
+        else if(event->key() == Qt::Key_Z)
+        {
+            //renderScene();
         }
     }
     QGraphicsScene::keyPressEvent(event);

@@ -20,10 +20,11 @@ private slots:
     void loop();
 private:
     void loadPixmap();
-    void render();
+    void renderGame();
     void updateLoop();
     void drawScores();
     void drawPauseText();
+    void renderScene();
     float m_deltaTime, m_loopTime;
     const float m_loopSpeed;
     Game m_game;

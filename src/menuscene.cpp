@@ -3,6 +3,9 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QFontDatabase>
 #include <QDebug>
+#include <QDir>
+#include <QPainter>
+#include <QKeyEvent>
 
 MenuScene::MenuScene(QObject *parent)
     : QGraphicsScene(parent)
@@ -43,6 +46,20 @@ MenuScene::MenuScene(QObject *parent)
 
 }
 
+
+void MenuScene::renderScene()
+{
+    static int index = 0;
+    QString fileName = QDir::currentPath() + QDir::separator() + "screen" + QString::number(index++) + ".png";
+    QRect rect = sceneRect().toAlignedRect();
+    QImage image(rect.size(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter(&image);
+    render(&painter);
+    image.save(fileName);
+    qDebug() << "saved " << fileName;
+}
+
 void MenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QPointF clickedPoint = event->scenePos();
@@ -76,4 +93,18 @@ void MenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
          emit pcVSpcActivated();
     }
+
+    QGraphicsScene::mousePressEvent(event);
+}
+
+void MenuScene::keyPressEvent(QKeyEvent *event)
+{
+    if(!event->isAutoRepeat())
+    {
+        if(event->key() == Qt::Key_Z)
+        {
+            //renderScene();
+        }
+    }
+    QGraphicsScene::keyPressEvent(event);
 }
