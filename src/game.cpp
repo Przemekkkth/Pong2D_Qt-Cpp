@@ -10,6 +10,7 @@ int Game::SCORE_1 = 0;
 int Game::SCORE_2 = 0;
 
 Game::Game()
+    : m_isPause(false)
 {
 
 }

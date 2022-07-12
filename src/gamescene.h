@@ -23,6 +23,7 @@ private:
     void render();
     void updateLoop();
     void drawScores();
+    void drawPauseText();
     float m_deltaTime, m_loopTime;
     const float m_loopSpeed;
     Game m_game;

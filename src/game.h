@@ -12,6 +12,7 @@ public:
     static const QString PATH_TO_BALL_PIXMAP;
     static const QString PATH_TO_CURSOR_PIXMAP;
     static int SCORE_1, SCORE_2;
+    bool m_isPause;
 };
 
 #endif // GAME_H

@@ -46,12 +46,13 @@ void GameScene::loop()
     m_elapsedTimer.restart();
 
     m_loopTime += m_deltaTime;
-    if( m_loopTime > m_loopSpeed )
+    if( m_loopTime > m_loopSpeed && !m_game.m_isPause)
     {
         m_loopTime -= m_loopSpeed;
         render();
         updateLoop();
     }
+    drawPauseText();
 }
 
 void GameScene::loadPixmap()
@@ -92,6 +93,7 @@ void GameScene::render()
     addItem(ball);
 
     drawScores();
+
 }
 
 void GameScene::updateLoop()
@@ -116,6 +118,19 @@ void GameScene::drawScores()
     text2->setPen(QPen(Qt::NoPen));
     text2->setPos(0.60f*Game::RESOLUTION.width(), 0.05f*Game::RESOLUTION.height());
     addItem(text2);
+}
+
+void GameScene::drawPauseText()
+{
+    if(m_game.m_isPause)
+    {
+        QGraphicsSimpleTextItem* pauseText = new QGraphicsSimpleTextItem("Pause");
+        pauseText->setFont(QFont(m_familyName, 50, 50, false));
+        pauseText->setBrush(QBrush(Qt::red));
+        pauseText->setPen(QPen(Qt::NoPen));
+        pauseText->setPos(0.40f*Game::RESOLUTION.width(), 0.45f*Game::RESOLUTION.height());
+        addItem(pauseText);
+    }
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)
@@ -153,6 +168,22 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         }
     }
         break;
+    }
+
+
+    if(!event->isAutoRepeat())
+    {
+        if(event->key() == Qt::Key_P)
+        {
+            if(m_game.m_isPause == false)
+            {
+                m_game.m_isPause = true;
+            }
+            else
+            {
+                m_game.m_isPause = false;
+            }
+        }
     }
     QGraphicsScene::keyPressEvent(event);
 }
