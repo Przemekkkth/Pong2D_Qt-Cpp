@@ -51,7 +51,7 @@ void GameScene::loop()
     m_elapsedTimer.restart();
 
     m_loopTime += m_deltaTime;
-    if( m_loopTime > m_loopSpeed && !m_game.m_isPause)
+    while( m_loopTime > m_loopSpeed && !m_game.m_isPause)
     {
         m_loopTime -= m_loopSpeed;
         renderGame();
@@ -96,6 +96,26 @@ void GameScene::renderGame()
     QGraphicsPixmapItem* ball = new QGraphicsPixmapItem(m_ballPixmap);
     ball->setPos(m_ball.position());
     addItem(ball);
+
+    QGraphicsLineItem *lItem = new QGraphicsLineItem();
+    lItem->setPen(QColor(Qt::red));
+    lItem->setLine(0,0,0, Game::RESOLUTION.height());
+    addItem(lItem);
+
+    QGraphicsLineItem *rItem = new QGraphicsLineItem();
+    rItem->setPen(QColor(Qt::red));
+    rItem->setLine(Game::RESOLUTION.width()-1,0, Game::RESOLUTION.width()-1, Game::RESOLUTION.height());
+    addItem(rItem);
+
+    QGraphicsLineItem *tItem = new QGraphicsLineItem();
+    tItem->setPen(QColor(Qt::green));
+    tItem->setLine(0,0, Game::RESOLUTION.width(), 0);
+    addItem(tItem);
+
+    QGraphicsLineItem *bItem = new QGraphicsLineItem();
+    bItem->setPen(QColor(Qt::green));
+    bItem->setLine(0,Game::RESOLUTION.height()-1, Game::RESOLUTION.width(), Game::RESOLUTION.height()-1);
+    addItem(bItem);
 
     drawScores();
 
