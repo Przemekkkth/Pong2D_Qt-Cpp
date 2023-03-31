@@ -20,4 +20,4 @@ qmake && make
 ## Adons
 * [Qt](https://www.qt.io/) - Cross-Platform software for embedded & desktop
 * [Yt](https://youtu.be/0Pt-XsYm9qI) - gameplay
-* [Play online](https://przemekkkth.github.io/pong2d/index.html) - game hosted on GitHub
+* [Play online](https://przemekkkth.github.io/assets/games/pong2d/index.html) - game hosted on GitHub
